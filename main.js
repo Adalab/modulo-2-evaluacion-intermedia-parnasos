@@ -2,30 +2,37 @@
 const button = document.querySelector(".js-button");
 const numberUser = document.querySelector(".js-yourNumber");
 const Clue = document.querySelector(".js-clue");
+const poss = document.querySelector(".js-try");
 
 function getRandomNumber(max) {
   return Math.ceil(Math.random() * max);
 }
 
-const numberRandom = parseInt(getRandomNumber(100));
+const numberRandom = getRandomNumber(100);
 console.log(numberRandom);
-
-const userValue = parseInt(numberUser.value);
-console.log(userValue);
-
-const messageClue = Clue.value;
 
 function play(event) {
   event.preventDefault();
+  const userValue = parseInt(numberUser.value);
+  console.log(userValue);
+
   if (userValue === numberRandom) {
-    messageClue.innerHTML = "Has ganado campeona!!!";
+    Clue.innerHTML = "Has ganado campeona!!!";
   } else if (userValue > numberRandom) {
-    messageClue.innerHTML = "Demasiado alto";
+    Clue.innerHTML = "Demasiado alto";
   } else if (userValue < numberRandom) {
-    messageClue.innerHTML = "Demasiado alto";
+    Clue.innerHTML = "Demasiado bajo";
   } else {
-    messageClue.innerHTML = "El número debe estar entre 1 y 100";
+    Clue.innerHTML = "El número debe estar entre 1 y 100";
   }
 }
 
+let count = 0;
+function Counter() {
+  count++;
+  poss.innerHTML = ` Número de intentos ${count}`;
+  console.log(poss.innerHTML);
+}
+
 button.addEventListener("click", play);
+button.addEventListener("click", Counter);
